@@ -52,3 +52,20 @@ window.addEventListener('scroll', _.throttle(function () {
 },300));
 //_.throttle(함수, 시간);
 
+
+
+const fadeEls = document.querySelectorAll('.visual .fade-in');
+fadeEls.forEach(function (fadeEl, index) {
+    gsap.to(fadeEl, 1, {
+        delay: (index+1) * .7,
+        opacity: 1
+    })
+});
+
+// SWIPER
+// new Swiper ( 선택자, 옵션)
+new Swiper('.swiper-container', {
+    direction: 'vertical', // 수직 슬라이드
+    autoplay: true, // 자동 재생 여부
+    loop: true // 반복 재생 여부
+  });
