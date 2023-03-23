@@ -64,8 +64,41 @@ fadeEls.forEach(function (fadeEl, index) {
 
 // SWIPER
 // new Swiper ( 선택자, 옵션)
-new Swiper('.swiper-container', {
+new Swiper('.notice-line .swiper-container', {
     direction: 'vertical', // 수직 슬라이드
     autoplay: true, // 자동 재생 여부
     loop: true // 반복 재생 여부
   });
+
+new Swiper('.promotion .swiper-container',{
+    slidesPerView: 3, // 한 화면에 보이는 슬라이드 갯수
+    spaceBetween: 10, // 슬라이드 사이의 공간 값
+    centeredSlides: true,
+    loop:true,
+    // autoplay : {
+    //     delay:50
+    // }
+    pagination:{
+        el: '.promotion .swiper-pagination', // 페이지 번호 요소 선택자
+        clickable: true // 사용자가 페이지 번호 요소 제어 가능
+    },
+    navigation:{
+        prevEl: '.promotion .swiper-prev',
+        nextEl: '.promotion .swiper-next'
+    }
+});
+
+const promotionEl = document.querySelector('.promotion');
+const promotionToggleBtn = document.querySelector('.toggle-promotion');
+let isHidePromotion = false;
+
+promotionToggleBtn.addEventListener('click', function () {
+    isHidePromotion = !isHidePromotion;
+    if(isHidePromotion) {
+        // 숨김 처리!
+        promotionEl.classList.add('hide');
+    }else{
+        // 나타내기!
+        promotionEl.classList.remove('hide');
+    }
+});
