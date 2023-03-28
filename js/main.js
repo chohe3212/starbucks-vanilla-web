@@ -23,7 +23,7 @@ searchinputEl.addEventListener('blur', function(){
 });
 
 const badgeE1 = document.querySelector('header .badges');
-
+const toTopEl = document.querySelector('#to-top');
 
 // scroll 이벤트를 할때 수십개의 이벤트가 발생하는데
 // 이렇게 되면 프로젝트가 무거워지고 안좋음...
@@ -31,7 +31,7 @@ const badgeE1 = document.querySelector('header .badges');
 // lodash에서 제공하는 throttle라는 특정한 기능을 사용함.
 window.addEventListener('scroll', _.throttle(function () {
     console.log(window.scrollY);
-    if (window.scrollY > 500) {
+    if (window.scrollY > 500 ) {
         // 광고 배찌 요소를 숨기기 
         gsap.to(badgeE1, .6, {
             opacity: 0,
@@ -42,17 +42,33 @@ window.addEventListener('scroll', _.throttle(function () {
         // 스크롤을 내려도 클릭이 안되도록
         // display 를 none으로
 
+
+        //to-top버튼 보이게 하기
+        gsap.to(toTopEl, .2,{
+            x : 0
+        });
+
     } else{
         // 광고 배찌 보이기
         gsap.to(badgeE1, .6, {
             opacity: 1,
             display: 'block'
         });
+
+        //to-top버튼 숨기기!
+        gsap.to(toTopEl, .2,{
+            x : 100
+        });
     }
 },300));
 //_.throttle(함수, 시간);
 
 
+toTopEl.addEventListener('click', function(){
+    gsap.to(window, .7, {
+        scrollTo: 0
+    });
+});
 
 const fadeEls = document.querySelectorAll('.visual .fade-in');
 fadeEls.forEach(function (fadeEl, index) {
@@ -145,3 +161,7 @@ spyEls.forEach(function(spyEl) {
         .addTo(new ScrollMagic.Controller());
 
 });
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear(); //2023이 나옴
+
